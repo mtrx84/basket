@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css">
+    <title>Basket</title>
+</head>
+
+<body>
+    <div class="container">
+
+        <section class="types">
+            <table class="table table-types-list">
+                <thead class="table-types-list-col">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Index</th>
+                        <th scope="col">Rodzaj</th>
+                        <th scope="col">Cena <br> netto</th>
+                        <th scope="col">Cena <br> Brutto</th>
+                        <th scope="col">Stan</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+
+                    </tr>
+                </thead>
+
+                <tbody class='table-types-list-row'>
+
+                </tbody>
+
+            </table>
+            <ul class="size-list"></ul>
+        </section>
+        <div class="alert-info">
+            <div class="alert alert-success" role="alert">
+                'Produkt dodany do koszyka'
+            </div>
+        </div>
+        <!--    KOSZYK -->
+        <section class="basket-of-products">
+            <span class="shopping-cart-icon" ><i class="fas fa-shopping-cart"></i></span>
+            <table class="table ">
+                <thead class="table-types-list-col">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Index</th>
+                        <th scope="col">Rodzaj</th>
+                        <th scope="col">Cena <br> netto</th>
+                        <th scope="col">Cena <br> Brutto</th>
+                        <th scope="col">Ilość</th>
+                        <th scope="col">Wartość <br> Netto</th>
+                        <th scope="col">Wartość <br> Brutto</th>
+
+                    </tr>
+                </thead>
+                <tbody class='list-of-products-row'>
+
+                </tbody>
+                <tfoot class="sum">
+
+                </tfoot>
+            </table>
+            <ul class="size-list"></ul>
+        </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <script src="app.js"> </script>
+</body>
+
+</html>

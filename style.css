@@ -1,0 +1,139 @@
+/* body{
+    fonst-size:28px
+
+} */
+
+.container{
+
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.btn{
+    padding: 0px 10px;
+}
+.container{
+    position: relative;
+}
+.alert-info{
+    position: fixed;
+    bottom: 5%;
+    right: -300px;
+    width: 250px;
+    padding: 0;
+    transform: translate(-10%, -10%);
+    background-color: #fff;
+    opacity: .9;
+    z-index: 2;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    transition: right .5s linear;
+}
+
+.alert-info.active {
+    position: fixed;
+    right: 10px;
+    width: 250px;
+    z-index: 2
+}
+
+.alert{
+    height: 100%;
+    margin-bottom: 0;
+}
+add-to-basket{
+    font-size: 2rem;
+}
+.table>:not(caption)>*>*{
+    padding:3px 3px;
+    vertical-align: middle;
+}
+
+.table-types-list-row {
+    margin-top:20px;
+}
+
+.shopping-cart-icon{
+
+    position: absolute;
+    left: -80px;
+    top:0;
+    transform: translateY(50%);
+    /*border: 1px solid black;*/
+    width: 70px;
+    height: 50px;
+    font-size: 2em;
+    text-align: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    cursor: pointer;
+}
+
+.basket-of-products{
+    display: none;
+    position: fixed;
+    background-color: aliceblue;
+    width: 70%;
+    top:0;
+    right: 0;
+    left: 100%;
+   transition: left .5s linear;
+    /*transform: translateX(100%);*/
+}
+
+.display-block{
+display:block ;
+}
+
+.active-basket {
+    left: 30%
+}
+
+.no-active{
+    display: none;
+}
+
+.quantity-of-order{
+    text-align: center;
+
+}
+
+.quantity-inputs button{
+    border:none;
+    margin:0;
+    padding:0;
+    width:40px;
+    background: none;
+    font-size: 1em;
+    color:#adb5bd
+}
+.quantity-inputs .plus:hover{
+    color:green
+}
+.quantity-inputs .minus:hover{
+    color:red
+}
+.quantity-inputs input{
+    border:none;
+    margin:0;
+    padding:0;
+    width:40px;
+    background: none;
+    font-size: 1em;
+}
+
+.quantity-inputs{
+width: 120px;
+    display:flex;
+    flex-wrap: nowrap;
+   justify-content: space-between;
+height:2em;
+    border: 1px solid #adb5bd;
+    border-radius:.5em;
+   
+}
+
+.quantity-inputs input:focus-visible{
+outline:0;
