@@ -1,5 +1,8 @@
 let products = []
 let productsInBasket = []
+const alertEl = document.querySelector('.alert-info');
+const img = document.getElementById('main-photo');
+const productInfoEl =  document.getElementById('product-info')
 // const productOnList = document.querySelector('.size-list')
 
 
@@ -18,10 +21,38 @@ fetch(`data/GetRelatedArticles_tarcze_metal_perfect.json`)
             const qty = e.qty;
             const characteristic = e.technicalInfo[0].value
             const newProduct = new Product(id, name, index, priceNetto, priceBrutto, qty, characteristic);
+            
             newProduct.addProductToArr(newProduct)
         })
+        console.log(products[0])
+        const {thumbPath, path } = products[0].images[0]
+        const{description, brandId, producerId, technicalInfo} = products[0]
+       
+        const commonFeatures =  new CommonFeatures(thumbPath, path, brandId, producerId, description, technicalInfo)
         View.showProducts()
+        commonFeatures.showImage()
+        commonFeatures.cheapestProduct()
     });
+
+class CommonFeatures{
+    constructor(thumbPath, path, brandId, producerId, description, technicalInfo){
+    this.thumbPath= thumbPath;
+    this.path= path;
+    this.brandId= brandId;
+    this.producerId= producerId;
+    this.description= description;
+    this.technicalInfo= technicalInfo;
+
+    }
+    showImage(){
+        console.log(this.thumbPath)
+img.src='https://wrobud.com.pl/zdjecia/'+this.thumbPath+'?'
+    }
+    cheapestProduct(){
+      const minPriceNetto = products.map((product)=> product.priceNetto)
+      console.log(minPriceNetto)
+}
+}
 
 class Product {
     constructor(id, name, index, priceNetto, priceBrutto, qty, characteristic) {
@@ -48,6 +79,27 @@ class ProductsInOrder extends Product {
         this.qtyInOrder = qtyInOrder;
     }
 }
+
+class Alert {
+    constructor(text, color) {
+        this.text = text;
+        this.color = color;
+    }
+    alertInfo2() {
+
+        alertEl.innerHTML = `
+            <div class="alert" role="alert">
+             ${this.text}
+            </div>`
+        alertEl.children[0].classList.add(`alert-${this.color}`)
+        alertEl.classList.add('active')
+        setTimeout(() => alertEl.classList.remove('active'), 3000)
+    }
+
+}
+
+
+
 
 class View {
     static alertInfo(text, color = 'success') {
@@ -83,7 +135,7 @@ class View {
                 `<tr >
                 <th scope="row" >${i + 1}</th>
                 <td scope="row">${e.index} </td>
-                <td>${e.name} </td>
+                <td style="overflow: hidden; max-width:150px; font-size:.8rem;">${e.name} </td>
                 <td>${(e.priceNetto.toFixed(2))}zł</td>
                 <td class="price-brutto">${(e.priceBrutto.toFixed(2))}zł</td>
                 <td scope="row" style="color: ${color} ">${qty}</td>
@@ -112,6 +164,8 @@ class View {
         View.enter()
 
     };
+
+ 
 
 
     static enter() {
@@ -176,10 +230,16 @@ class View {
             quantity--
         } else if (quantity > Number(quantityInput.max)) {
             quantity = Number(quantityInput.max)
-            View.alertInfo('Ilość zredukowana', 'danger')
+            // View.alertInfo('Ilość zredukowana', 'danger')
+            // new Alert.alertInfo('Ilość zredukowana', 'danger')
+            const alert = new Alert()
+            alert.alertInfo2('Ilość zredukowana', 'danger')
         }
         else {
-            View.alertInfo('Towar niedostępny lub nie podano ilości', 'danger')
+            // View.alertInfo()
+            // new Alert.alertInfo('Ilość zredukowana', 'danger')
+            const alert = new Alert('Towar niedostępny lub nie podano ilości', 'danger')
+            alert.alertInfo2()
             return
         }
         quantityInput.value = quantity
@@ -193,8 +253,9 @@ class View {
         console.log(ProductOrder)
         productsInBasket.push(ProductOrder)
         new Basket().basketProducts(ProductOrder)
-
-        View.alertInfo('Produkt dodany do koszyka')
+        const alert = new Alert('Produkt dodany do koszyka')
+        alert.alertInfo2()
+        // View.alertInfo('Produkt dodany do koszyka')
     };
 
     static sumInTable(sumNetto, sumBrutto) {
@@ -274,7 +335,6 @@ class Basket {
 
         View.sumInTable(this.sumNetto, this.sumBrutto)
         document.querySelectorAll(`.delete-from-basket`).forEach(e => e.addEventListener('click', () => {
-            console.log(this)
             this.deleteProductFromBasket(e)
         }));
         this.basketOfProductsEl.classList.add('display-block');
@@ -284,12 +344,12 @@ class Basket {
 
 
     viewBasket() {
-        console.log(this)
-        // const baksetOfProductsEl= ;
         const typesEl = document.querySelector('.types');
         document.querySelector('.basket-of-products').classList.toggle('active-basket')
-        typesEl.classList.toggle('no-active')
-        console.log('ok')
+        typesEl.classList.value === 'types' ? typesEl.classList.add('no-active') : setTimeout(() => typesEl.classList.remove('no-active'), 700)
+    //   productInfoEl.classList.value = 'product-info' ?setTimeout(() => productInfoEl.classList.remove('no-active'), 700): productInfoEl.classList.add('no-active')
+      productInfoEl.classList.value === 'row p-4' ? productInfoEl.classList.add('no-active'):setTimeout(() => productInfoEl.classList.remove('no-active'), 700)
+    console.log(productInfoEl.classList.value)
     }
 
     deleteProductFromBasket(e) {
@@ -298,7 +358,6 @@ class Basket {
         productsInBasket.forEach((product, i) => {
             if (productId == product.id) {
                 productsInBasket.splice(i, 1)
-                console.log(productsInBasket)
                 document.getElementById(`delete-from-basket-${product.id}`).parentElement.parentElement.remove()
                 document.getElementById(`quantity-${productId}`).style.backgroundColor = ''
                 View.alertInfo(`Produkt ${product.name} został usunięty`, 'warning')
@@ -308,7 +367,8 @@ class Basket {
             if (productsInBasket.length === 0) {
                 const typesEl = document.querySelector('.types');
                 document.querySelector('.basket-of-products').classList.toggle('active-basket')
-                typesEl.classList.toggle('no-active')
+                typesEl.classList.value === 'types' ? typesEl.classList.add('no-active') : setTimeout(() => typesEl.classList.remove('no-active'), 700);
+                productInfoEl.classList.value === 'row p-4' ? productInfoEl.classList.add('no-active'):setTimeout(() => productInfoEl.classList.remove('no-active'), 700)
                 setTimeout(() => { document.querySelector('.basket-of-products').classList.remove('display-block') }, 1000)
                 View.alertInfo("Koszyk wyczyszczoy", 'warning')
             }

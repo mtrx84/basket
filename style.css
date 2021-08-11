@@ -1,11 +1,8 @@
-/* body{
-    fonst-size:28px
-
-} */
-
-.container{
-
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400&display=swap');
+body{
+    font-family: Nunito;
 }
+
 
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
@@ -74,12 +71,18 @@ add-to-basket{
 .basket-of-products{
     display: none;
     position: fixed;
-    background-color: aliceblue;
-    width: 70%;
+    /* background-color: aliceblue; */
+   
+    /* width: 70%; */
     top:0;
     right: 0;
-    left: 100%;
+    left: 10%;
+    height:100%;
+    padding:1.5rem;
+    transform: translateX(100%);
+    /* overflow: hidden; */
    transition: left .5s linear;
+   transition: transform .5s linear;
     /*transform: translateX(100%);*/
 }
 
@@ -88,11 +91,13 @@ display:block ;
 }
 
 .active-basket {
-    left: 30%
+    /* left: 30% */
+    transform:translateX(0%)
 }
 
 .no-active{
     display: none;
+ 
 }
 
 .quantity-of-order{
@@ -137,3 +142,36 @@ height:2em;
 
 .quantity-inputs input:focus-visible{
 outline:0;
+}
+
+.desc h1{
+    font-size: 2.5rem;
+    font-weight: normal
+}
+.price h3{
+    text-align:left;
+}
+
+.desc-price span{
+    font-size:1rem;
+    color: #909090
+}
+
+.desc-price-netto{
+    font-size:  2rem;
+    
+}
+.desc-price-brutto{
+    font-size:  3rem;
+    color:#db0303;
+}
+
+
+
+.desc-producer p strong {
+    float: right;
+}
+
+.desc-characteristic{
+    font-size: .8rem;
+}
